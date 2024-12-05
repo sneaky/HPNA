@@ -2,10 +2,11 @@ import requests
 import time
 
 # TODO:
-# 1) check if the post currently has a comment that contains an archive.ph link (used to get around paywalls)
-# 2) if the post doesn't currently have an archive link and is behind a paywall, go ahead and post the link
-# 3) Allow users to comment on my comments saying remove: X or add: X, if enough users do this X will be removed or added to the list of paywalled_sites
+# 1) Check if the post currently has a comment that contains an archive.ph link (used to get around paywalls)
+# 2) It appears there's no way to make posts using the HN API, so instead we could analyze the posts and maintain a list of recent posts that contain links that might be behind a paywall that don't already have an 'archive.ph' link commented.
+# 3) This way, it would allow anyone with a mind to do some civic service to manually step through those posts and add archive links to them.
 # 4) Figure out a way to have this running "continuously" without overloading the API
+# 5) A possible addition might be to go ahead and grab an 'archive.ph' link and provide that to the user to minimize repetative tasks.
 
 
 def is_paywalled(url):
