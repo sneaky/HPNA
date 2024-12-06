@@ -16,7 +16,7 @@ def is_paywalled(url):
         "ft.com",
         "theguardian.com",
         "bloomberg.com",
-        "hbr.org",  # harvard business review
+        "hbr.org",
         "wsj.com",
         "https://www.economist.com/",
         "nationalpost.com",
@@ -30,7 +30,7 @@ def is_paywalled(url):
         "thetimes.co.uk",
         "thesundaytimes.co.uk",
         "kyivpost.com",
-        "independent.co.uk",
+        "independent.co.uk"
     ]
 
     return any(site in url for site in paywalled_sites)
@@ -41,7 +41,7 @@ def get_recent_hn_posts(minutes=10):
     new_stories_url = f"{base_url}/newstories.json"
     item_url = f"{base_url}/item/{{}}.json"
 
-    # Calculate the cutoff time (current time - 10 minutes)
+    # Calculate the cutoff time (current time - N minutes)
     cutoff_time = time.time() - (minutes * 60)
 
     # Get the latest story IDs
@@ -65,18 +65,18 @@ def get_recent_hn_posts(minutes=10):
 
     return recent_stories
 
-
-# Fetch recent posts from the last 10 minutes
-recent_posts = get_recent_hn_posts(10)
-for post in recent_posts:
-    print(
-        f"Title: {post.get('title')}, URL: {post.get('url')}, Time: {post.get('time')}")
-    if (post.get('url') is not None):
+if __name__ == "__main__":
+    # Fetch recent posts from the last 10 minutes
+    recent_posts = get_recent_hn_posts(10)
+    for post in recent_posts:
         # avoid making additional API calls where possible
-        this_url = post.get('url')
-        if is_paywalled(this_url):
-            print(f"The URL '{this_url}' is likely behind a paywall.")
-        else:
-            print(
-                f"The URL '{this_url}' does not match known paywalled sites.")
-    print()
+        article_url = post.get('url');
+        print(
+            f"Title: {post.get('title')}, URL: {article_url}, Time: {post.get('time')}")
+        if (article_url is not None):
+            if is_paywalled(article_url):
+                print(f"The URL '{article_url}' is likely behind a paywall.")
+            else:
+                print(
+                    f"The URL '{article_url}' does not match known paywalled sites.")
+        print()
