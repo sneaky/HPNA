@@ -7,7 +7,7 @@ import time
 # 3) This way, it would allow anyone with a mind to do some civic service to manually step through those posts and add archive links to them.
 # 4) Figure out a way to have this running "continuously" without overloading the API
 # 5) A possible addition might be to go ahead and grab an 'archive.ph' link and provide that to the user to minimize repetative tasks.
-
+# 6) Use Google Sheets API to store recent posts with a paywall link that don't have an archive.ph link comment so I can easily and cheaply share this information with people interested in helping out.
 
 def is_paywalled(url):
     paywalled_sites = [
